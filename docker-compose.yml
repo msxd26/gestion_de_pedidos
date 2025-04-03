@@ -1,0 +1,14 @@
+services:
+
+  db:
+    container_name: "Gestion-de-Pedidos"
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: "GestionPedidos"
+      POSTGRES_USER: "grupo2"
+      POSTGRES_PASSWORD: "secret$"
+    volumes:
+      - ./sql/:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
