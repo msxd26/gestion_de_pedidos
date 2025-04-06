@@ -15,6 +15,7 @@ import com.grupo2.gestionpedidos.repositories.ProductRepository;
 import com.grupo2.gestionpedidos.services.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -31,6 +32,7 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
+    @Transactional(readOnly = true)
     public OrderResponse findById(Long id) {
         return orderRepository.findById(id)
                 .map(orderMapper::orderToOrderResponse)
@@ -38,6 +40,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public OrderResponse save(OrderRequest orderRequest) {
 
         Order order = orderMapper.orderRequestToOrder(orderRequest);
@@ -53,12 +56,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderResponse update(OrderRequest orderRequest, Long aLong) {
+    @Transactional
+    public OrderResponse update(OrderRequest orderRequest, Long id) {
+        Order order = orderRepository.findById(id).orElseThrow(() -> new OrderNotFoundException("No existe el numero de order: " + id));
+
         return null;
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
-
+        Order order = orderRepository.findById(id).orElseThrow();
+        orderRepository.delete(order);
     }
 }

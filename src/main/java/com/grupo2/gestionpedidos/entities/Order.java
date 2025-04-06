@@ -54,5 +54,22 @@ public class Order {
         this.orderDate = LocalDateTime.now();
     }
 
+    public void removeOrderDetail(OrderDetail orderDetail) {
+        if(orderDetail != null && this.orderDetails != null) {
+            this.orderDetails.remove(orderDetail);
+            orderDetail.setOrder(null);
+        }
+    }
+
+    public void addOrderDetail(OrderDetail orderDetail) {
+        if(orderDetail != null) {
+            if(this.orderDetails == null) {
+                this.orderDetails = new ArrayList<>();
+            }
+            this.orderDetails.add(orderDetail);
+            orderDetail.setOrder(this);
+        }
+    }
+
 
 }
