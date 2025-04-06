@@ -1,9 +1,8 @@
-package com.grupo2.gestionpedidos.dtos;
+package com.grupo2.gestionpedidos.dtos.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 import java.math.BigDecimal;
 
@@ -11,7 +10,9 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductRequest {
+public class ProductResponse {
+
+    private Long idProduct;
 
     private String nameProduct;
 
