@@ -1,16 +1,14 @@
 package com.grupo2.gestionpedidos.mappers;
 
-import com.grupo2.gestionpedidos.dtos.ProductRequest;
-import com.grupo2.gestionpedidos.dtos.ProductResponse;
+import com.grupo2.gestionpedidos.dtos.request.ProductRequest;
+import com.grupo2.gestionpedidos.dtos.response.ProductResponse;
 import com.grupo2.gestionpedidos.entities.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
+
 
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
-
-    ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
 
     @Mapping(source = "id", target = "idProduct")
     @Mapping(source = "name", target = "nameProduct")
