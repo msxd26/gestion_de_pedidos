@@ -15,7 +15,9 @@ import com.grupo2.gestionpedidos.repositories.ProductRepository;
 import com.grupo2.gestionpedidos.services.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Service
@@ -31,6 +33,7 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
+    @Transactional(readOnly = true)
     public OrderResponse findById(Long id) {
         return orderRepository.findById(id)
                 .map(orderMapper::orderToOrderResponse)
@@ -38,14 +41,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public OrderResponse save(OrderRequest orderRequest) {
-
         Order order = orderMapper.orderRequestToOrder(orderRequest);
+
+        BigDecimal total=BigDecimal.ZERO;
         if (order.getOrderDetails() != null) {
             for (OrderDetail orderDetail : order.getOrderDetails()) {
+                BigDecimal subtotal = orderDetail.getPrice().multiply(BigDecimal.valueOf(orderDetail.getQuantity()));
+                total =  total.add(subtotal);
                 orderDetail.setOrder(order);
             }
-        }
+        }order.setTotal(total);
         return Optional.of(order)
                 .map(orderRepository::save)
                 .map(orderMapper::orderToOrderResponse)
@@ -53,12 +60,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderResponse update(OrderRequest orderRequest, Long aLong) {
+    @Transactional
+    public OrderResponse update(OrderRequest orderRequest, Long id) {
+        Order order = orderRepository.findById(id).orElseThrow(() -> new OrderNotFoundException("No existe el numero de order: " + id));
+
         return null;
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
-
+        Order order = orderRepository.findById(id).orElseThrow();
+        orderRepository.delete(order);
     }
 }

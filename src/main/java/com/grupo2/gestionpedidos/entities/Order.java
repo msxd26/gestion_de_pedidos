@@ -17,6 +17,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,8 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    private BigDecimal total;
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "order")
     private List<OrderDetail> orderDetails;
 
@@ -52,6 +55,23 @@ public class Order {
     @PrePersist
     private void prePersist() {
         this.orderDate = LocalDateTime.now();
+    }
+
+    public void removeOrderDetail(OrderDetail orderDetail) {
+        if(orderDetail != null && this.orderDetails != null) {
+            this.orderDetails.remove(orderDetail);
+            orderDetail.setOrder(null);
+        }
+    }
+
+    public void addOrderDetail(OrderDetail orderDetail) {
+        if(orderDetail != null) {
+            if(this.orderDetails == null) {
+                this.orderDetails = new ArrayList<>();
+            }
+            this.orderDetails.add(orderDetail);
+            orderDetail.setOrder(this);
+        }
     }
 
 
