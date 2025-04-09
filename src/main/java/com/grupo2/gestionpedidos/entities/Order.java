@@ -17,6 +17,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,8 @@ public class Order {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    private BigDecimal total;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "order")
     private List<OrderDetail> orderDetails;

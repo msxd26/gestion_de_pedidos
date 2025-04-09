@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Service
@@ -42,13 +43,16 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public OrderResponse save(OrderRequest orderRequest) {
-
         Order order = orderMapper.orderRequestToOrder(orderRequest);
+
+        BigDecimal total=BigDecimal.ZERO;
         if (order.getOrderDetails() != null) {
             for (OrderDetail orderDetail : order.getOrderDetails()) {
+                BigDecimal subtotal = orderDetail.getPrice().multiply(BigDecimal.valueOf(orderDetail.getQuantity()));
+                total =  total.add(subtotal);
                 orderDetail.setOrder(order);
             }
-        }
+        }order.setTotal(total);
         return Optional.of(order)
                 .map(orderRepository::save)
                 .map(orderMapper::orderToOrderResponse)
