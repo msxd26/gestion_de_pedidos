@@ -2,7 +2,6 @@ package com.grupo2.gestionpedidos.services.impl;
 
 import com.grupo2.gestionpedidos.dtos.response.UserResponse;
 import com.grupo2.gestionpedidos.mappers.UserMapper;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -34,6 +33,7 @@ public class JpaUserDetailsService implements UserDetailsService {
         }
 
         List<GrantedAuthority> authorities = userResponse.getRoles().stream()
+                .filter(role -> role.getNameRole() != null && !role.getNameRole().isBlank())
                 .map(role -> new SimpleGrantedAuthority(role.getNameRole()))
                 .collect(Collectors.toList());
         return new User(userResponse.getEmail(), userResponse.getPassword(), authorities);

@@ -3,7 +3,6 @@ package com.grupo2.gestionpedidos.security.filter;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.grupo2.gestionpedidos.entities.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -27,9 +26,10 @@ import java.util.Map;
 import static com.grupo2.gestionpedidos.security.TokenJwtConfig.*;
 
 
+
 public class JwtAuthenticationFilter  extends UsernamePasswordAuthenticationFilter {
 
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;

@@ -12,8 +12,8 @@ public class ApiDocsConfig {
     public OpenAPI api() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Coworking")
-                        .description("Gestion de Salas y Reservas para Colaboracion")
+                        .title("Gestion de pedidos")
+                        .description("Gestion de pedidos")
                         .version("1.0.0"));
     }
 }

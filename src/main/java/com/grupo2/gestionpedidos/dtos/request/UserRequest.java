@@ -17,6 +17,5 @@ public class UserRequest {
     private String name;
     private String email;
     private String password;
-    private List<Long> roleIds;
     private boolean isAdmin;
 }

@@ -13,7 +13,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    @Mapping(target = "roles", ignore = true) // evita errores cuando haces post
+    @Mapping(target = "roles", ignore = true)
     User userRequestToUser(UserRequest request);
 
     @Mapping(source = "roles", target = "roles")
