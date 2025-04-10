@@ -17,8 +17,8 @@ CREATE TABLE UserRoles (
                            user_id INT NOT NULL,
                            role_id INT NOT NULL,
                            PRIMARY KEY (user_id, role_id),
-                           CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES Users (id) ON DELETE CASCADE,
-                           CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES Roles (id) ON DELETE CASCADE
+                           CONSTRAINT fk_userroles_user FOREIGN KEY (user_id) REFERENCES Users (id),
+                           CONSTRAINT fk_userroles_role FOREIGN KEY (role_id) REFERENCES Roles (id)
 );
 
 CREATE TABLE Products (
@@ -31,19 +31,19 @@ CREATE TABLE Products (
 
 CREATE TABLE Orders (
                         id SERIAL PRIMARY KEY,
-                        user_id INT,
+                        user_id INT NOT NULL,
                         order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                        total DECIMAL(10,2) NOT NULL,
+                        total DECIMAL(10, 2) NOT NULL CHECK (total >= 0),
                         status VARCHAR(20) NOT NULL DEFAULT 'Pending',
-                        CONSTRAINT fk_order_user FOREIGN KEY (user_id) REFERENCES Users (id)
+                        CONSTRAINT fk_orders_user FOREIGN KEY (user_id) REFERENCES Users (id)
 );
 
 CREATE TABLE OrderDetails (
                               id SERIAL PRIMARY KEY,
-                              order_id INT,
-                              product_id INT,
+                              order_id INT NOT NULL,
+                              product_id INT NOT NULL,
                               quantity INT NOT NULL CHECK (quantity > 0),
-                              price DECIMAL(10, 2) NOT NULL,
-                              CONSTRAINT fk_order FOREIGN KEY (order_id) REFERENCES Orders (id),
-                              CONSTRAINT fk_product FOREIGN KEY (product_id) REFERENCES Products (id)
+                              price DECIMAL(10, 2) NOT NULL CHECK (price > 0),
+                              CONSTRAINT fk_orderdetails_order FOREIGN KEY (order_id) REFERENCES Orders (id),
+                              CONSTRAINT fk_orderdetails_product FOREIGN KEY (product_id) REFERENCES Products (id)
 );

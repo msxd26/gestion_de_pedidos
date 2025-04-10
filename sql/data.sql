@@ -1,21 +1,23 @@
--- Roles (5)
-INSERT INTO roles (name) VALUES ('ROLE_USER'), ('ROLE_ADMIN');
+INSERT INTO Roles (name, description) VALUES
+                                          ('ROLE_USER', 'Usuario con permisos básicos'),
+                                          ('ROLE_ADMIN', 'Administrador con todos los permisos');
 
+INSERT INTO Users (name, email, password, total_spent) VALUES
+                                                           ('Carlos Ruiz', 'carlos@example.com', '1234', 200.00),
+                                                           ('María López', 'maria@example.com', '1234', 0.00),
+                                                           ('Pedro Sánchez', 'pedro@example.com', '1234', 150.50),
+                                                           ('Lucía Pérez', 'lucia@example.com', '1234', 300.00),
+                                                           ('Ana Torres', 'ana@example.com', '1234', 0.00),
+                                                           ('Juan García', 'juan@example.com', '1234', 0.00),
+                                                           ('Marta Díaz', 'marta@example.com', '1234', 0.00),
+                                                           ('Elena Vargas', 'elena@example.com', '1234', 0.00),
+                                                           ('Jorge Castro', 'jorge@example.com', '1234', 0.00),
+                                                           ('Nina Rojas', 'nina@example.com', '1234', 0.00);
 
--- Users (10)
-INSERT INTO Users (name, email, password, total_spent, role_id) VALUES
-                                                                    ('Carlos Ruiz', 'carlos@example.com', '1234', 200.00, 2),
-                                                                    ('María López', 'maria@example.com', '1234', 0.00, 2),
-                                                                    ('Pedro Sánchez', 'pedro@example.com', '1234', 150.50, 2),
-                                                                    ('Lucía Pérez', 'lucia@example.com', '1234', 300.00, 2),
-                                                                    ('Ana Torres', 'ana@example.com', '1234', 0.00, 5),
-                                                                    ('Juan García', 'juan@example.com', '1234', 0.00, 3),
-                                                                    ('Marta Díaz', 'marta@example.com', '1234', 0.00, 3),
-                                                                    ('Elena Vargas', 'elena@example.com', '1234', 0.00, 4),
-                                                                    ('Jorge Castro', 'jorge@example.com', '1234', 0.00, 1),
-                                                                    ('Nina Rojas', 'nina@example.com', '1234', 0.00, 2);
+INSERT INTO UserRoles (user_id, role_id) VALUES
+                                             (1, 2), (2, 2), (3, 2), (4, 2), (10, 2),  -- Admins
+                                             (5, 1), (6, 1), (7, 1), (8, 1), (9, 1);    -- Users
 
--- Products (15)
 INSERT INTO Products (name, stock, price, description) VALUES
                                                            ('Laptop HP', 10, 1200.00, 'Laptop para uso profesional'),
                                                            ('Mouse Logitech', 50, 25.00, 'Mouse inalámbrico'),
@@ -33,7 +35,6 @@ INSERT INTO Products (name, stock, price, description) VALUES
                                                            ('Router TP-Link', 22, 60.00, 'WiFi de alta velocidad'),
                                                            ('Power Bank 20000mAh', 45, 40.00, 'Carga portátil');
 
--- Orders (10)
 INSERT INTO Orders (user_id, total, status) VALUES
                                                 (1, 150.00, 'Completed'),
                                                 (2, 80.00, 'Completed'),
@@ -46,7 +47,6 @@ INSERT INTO Orders (user_id, total, status) VALUES
                                                 (7, 120.00, 'Processing'),
                                                 (8, 200.00, 'Completed');
 
--- OrderDetails (10)
 INSERT INTO OrderDetails (order_id, product_id, quantity, price) VALUES
                                                                      (1, 2, 2, 25.00),
                                                                      (1, 3, 1, 80.00),
