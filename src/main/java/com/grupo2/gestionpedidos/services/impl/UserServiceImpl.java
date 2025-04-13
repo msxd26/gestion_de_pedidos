@@ -14,8 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -70,11 +69,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse update(UserRequest userRequest, Long id) {
-        return null;
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        user.setName(userRequest.getName());
+        user.setEmail(userRequest.getEmail());
+        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+
+        User updatedUser = userRepository.save(user);
+        return userMapper.userToUserResponse(updatedUser);
     }
 
     @Override
-    public void delete(Long id) {
-
+    public void delete(Long id){
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        userRepository.delete(user);
     }
 }
