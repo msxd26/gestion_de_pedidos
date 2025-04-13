@@ -41,6 +41,10 @@ public class JwtValidationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
+        if (request.getRequestURI().startsWith("/swagger-ui/") || request.getRequestURI().startsWith("/v3/api-docs")) {
+            chain.doFilter(request, response);
+            return;
+        }
 
         String header = request.getHeader(HEADER_AUTHORIZATION);
 
