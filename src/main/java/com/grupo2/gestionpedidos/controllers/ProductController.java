@@ -25,7 +25,7 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("{id}")
-    public ResponseEntity<ProductResponse> findById(@PathVariable Long id) {
+    public ResponseEntity<ProductResponse> findById(@Valid @PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(productService.findById(id));
     }
 

@@ -14,8 +14,6 @@ public class OrderRequest {
 
     private Long idUserOrder;
 
-    private String statusOrder;
-
     private List<OrderDetailRequest> orderDetails;
 
 }

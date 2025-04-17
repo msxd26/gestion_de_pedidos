@@ -19,7 +19,6 @@ public interface OrderMapper {
     OrderResponse orderToOrderResponse(Order order);
 
     @Mapping(source = "idUserOrder", target = "user")
-    @Mapping(source = "statusOrder", target = "status")
     @Mapping(source = "orderDetails", target = "orderDetails")
     Order orderRequestToOrder(OrderRequest orderRequest);
 
