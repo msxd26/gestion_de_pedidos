@@ -1,5 +1,6 @@
 package com.grupo2.gestionpedidos.controllers;
 
+import com.grupo2.gestionpedidos.exceptions.OrderNotFoundException;
 import com.grupo2.gestionpedidos.exceptions.ProductNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,15 @@ public class GlobalControllerAdvice {
         errors.put("mensaje", ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
     }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ResponseEntity<?> handlerOrder(OrderNotFoundException ex) {
+        logger.error("Order no encontrada : {}", ex.getMessage());
+        Map<String, String> errors = new HashMap<>();
+        errors.put("mensaje", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
+    }
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleValidationException(MethodArgumentNotValidException ex) {
