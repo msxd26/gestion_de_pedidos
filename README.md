@@ -65,5 +65,43 @@ Todo el entorno del proyecto ya está completamente **dockerizado** para que pue
    ```bash
    docker compose up -d
 3. ¡Listo! La aplicación estará corriendo y lista para usarse.
+📌 Asegúrate de tener Docker y Docker Compose instalados en tu máquina antes de ejecutar el comando.
 
-##📌 Asegúrate de tener Docker y Docker Compose instalados en tu máquina antes de ejecutar el comando.
+### 🔐 1. Usar el token JWT en las peticiones
+
+Una vez que obtienes el token, debes agregarlo a cada petición protegida:
+
+- En Postman, ve a la pestaña **Authorization**
+- Tipo: `Bearer Token`
+- Pega el token en el campo correspondiente
+
+---
+
+### 📦 2. Endpoints disponibles
+
+#### 🧑‍💼 Usuario (`/api/user`)
+
+| Método | Endpoint          | Descripción         |
+|--------|-------------------|---------------------|
+| POST   | `/api/user`       | Crear usuario       |
+| GET    | `/api/user/{id}`  | Obtener por ID      |
+| PUT    | `/api/user/{id}`  | Actualizar usuario  |
+| DELETE | `/api/user/{id}`  | Eliminar usuario    |
+
+#### 📦 Producto (`/api/product`)
+
+| Método | Endpoint            | Descripción         |
+|--------|---------------------|---------------------|
+| POST   | `/api/product`      | Crear producto      |
+| GET    | `/api/product/{id}` | Obtener por ID      |
+| PUT    | `/api/product/{id}` | Actualizar producto |
+| DELETE | `/api/product/{id}` | Eliminar producto   |
+
+#### 🧾 Orden (`/api/order`)
+
+| Método | Endpoint           | Descripción         |
+|--------|--------------------|---------------------|
+| POST   | `/api/order`       | Crear orden         |
+| GET    | `/api/order/{id}`  | Obtener por ID      |
+| PUT    | `/api/order/{id}`  | Actualizar orden    |
+| DELETE | `/api/order/{id}`  | Eliminar orden      |
