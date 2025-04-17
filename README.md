@@ -1,53 +1,78 @@
-# Sistema de Gestión de Pedidos con Spring Boot y Kafka
 
-## Descripción del Proyecto
 
-Este proyecto es un sistema de gestión de pedidos desarrollado con un stack tecnológico moderno basado en **Spring Boot**, **Apache Kafka**, **JPA (Hibernate)** y **PostgreSQL**. Su objetivo principal es proporcionar una solución eficiente y segura para la gestión de usuarios, productos y pedidos, implementando una arquitectura **MVC** que asegura un código organizado y mantenible. 
+🛒 Sistema de Gestión de Pedidos con Spring Boot y Kafka
+📌 Descripción del Proyecto
+Este proyecto es una solución completa para la gestión de pedidos desarrollada con tecnologías modernas como Spring Boot, Apache Kafka, JPA (Hibernate) y PostgreSQL. El sistema permite administrar usuarios, productos y pedidos de forma segura, eficiente y escalable.
 
-El sistema incluye autenticación y autorización mediante **JWT** y **Spring Security**, permitiendo un control de acceso basado en roles (usuario y administrador). Además, utiliza **Kafka** para la comunicación asincrónica, enviando notificaciones sobre cambios en los pedidos (creación, modificación, cancelación). La persistencia de datos se realiza en una base de datos **PostgreSQL**, y las funcionalidades están documentadas y probadas con **Postman**.
+Se implementa una arquitectura basada en MVC, junto con Spring Security + JWT para autenticación y autorización basada en roles (usuario y administrador). Además, se utiliza Apache Kafka para el manejo asincrónico de eventos relacionados con los pedidos (creación, actualización, cancelación).
 
-### Funcionalidades Principales
-- **Gestión de Usuarios**: Registro, inicio de sesión y autenticación segura con JWT.
-- **Gestión de Productos**: Operaciones CRUD (Crear, Leer, Actualizar, Eliminar) con validaciones de negocio.
-- **Gestión de Pedidos**: Creación, modificación y eliminación de pedidos, con control de stock y notificaciones asincrónicas.
-- **Comunicación Asincrónica**: Uso de Kafka para notificar eventos relacionados con los pedidos.
+Todo el entorno del proyecto ya está completamente dockerizado para que puedas levantarlo con un solo comando y empezar a trabajar sin complicaciones.
 
-### Tecnologías Utilizadas
-- **Spring Boot**: Framework principal para el desarrollo del backend.
-- **JPA (Hibernate)**: Persistencia de datos con mapeo objeto-relacional.
-- **Apache Kafka**: Comunicación asincrónica y manejo de eventos.
-- **Spring Security + JWT**: Seguridad y control de acceso.
-- **PostgreSQL**: Base de datos relacional.
-- **Postman**: Pruebas y documentación de APIs.
+🚀 Características Principales
+✅ Gestión de Usuarios: Registro, login y autenticación vía JWT.
 
-## Estructura de la Base de Datos
-A continuación se muestra el esquema de la relación de tablas:
+🛍️ Gestión de Productos: CRUD completo con validaciones.
+
+📦 Gestión de Pedidos: Control de stock, creación, actualización, eliminación de pedidos.
+
+🔄 Comunicación Asincrónica con Kafka: Notificación automática de eventos de pedidos.
+
+🧾 Persistencia con PostgreSQL.
+
+🔐 Control de Acceso con Spring Security.
+
+📬 Pruebas de Endpoints con Postman.
+
+⚙️ Tecnologías Utilizadas
+Java 17
+
+Spring Boot
+
+Spring Security + JWT
+
+Apache Kafka
+
+JPA (Hibernate)
+
+PostgreSQL
+
+Docker & Docker Compose
+
+Postman
+
+🏗️ Estructura de la Base de Datos
+Aquí se muestra un esquema relacional de las tablas:
 
 ![Esquema de la Base de Datos](https://github.com/user-attachments/assets/fbfd6828-96a4-4dcf-beb5-875b2b25589d)
 
-## Objetivos del Proyecto
-- Implementar un sistema escalable y seguro para la gestión de pedidos.
-- Aplicar principios de diseño como SOLID para garantizar un código limpio y mantenible.
-- Integrar tecnologías modernas como Kafka para manejar procesos asincrónicos.
-- Proporcionar una documentación clara y pruebas funcionales de los endpoints.
 
-## Cómo Clonar el Repositorio
-Para clonar este repositorio y comenzar a trabajar con el proyecto, sigue estos pasos:
+🎯 Objetivos del Proyecto
+Desarrollar una solución escalable y segura para la gestión de pedidos.
 
-1. Asegúrate de tener instalado **Git** en tu máquina.
-2. Abre una terminal y ejecuta el siguiente comando:
-   ```bash
-   git clone https://github.com/msxd26/gestion_de_pedidos.git
-   ```
+Aplicar buenas prácticas como los principios SOLID y arquitectura limpia.
 
-3. Navega al directorio del proyecto:
-   ```bash
-   cd gestion_de_pedidos
-   ```
-4. Configura las dependencias y la conexión a la base de datos en el archivo `application.properties` o `application.yml`.
-5. Ejecuta el proyecto con:
-   ```bash
-   ./mvnw spring-boot:run
-   ```
+Integrar tecnologías modernas como Kafka para comunicación asincrónica.
 
+Proporcionar una experiencia de desarrollo sencilla con entornos ya preconfigurados.
 
+Documentar y probar de forma clara los endpoints disponibles.
+
+🐳 Puesta en Marcha con Docker Compose
+¡Todo ya está configurado! No necesitas instalar bases de datos ni servicios adicionales manualmente. Solo sigue estos pasos:
+
+Clona el repositorio:
+
+bash
+Copy
+Edit
+git clone https://github.com/msxd26/gestion_de_pedidos.git
+cd gestion_de_pedidos
+Levanta todos los servicios (backend, base de datos, kafka, zookeeper, etc.) con un solo comando:
+
+bash
+Copy
+Edit
+docker compose up -d
+¡Listo! La aplicación estará corriendo y lista para usarse.
+
+📌 Asegúrate de tener Docker y Docker Compose instalados en tu máquina antes de ejecutar el comando.
