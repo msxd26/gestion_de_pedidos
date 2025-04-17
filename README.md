@@ -60,9 +60,10 @@ Todo el entorno del proyecto ya está completamente **dockerizado** para que pue
 1. Clona el repositorio:
    ```bash
    git clone https://github.com/msxd26/gestion_de_pedidos.git
-   cd gestion_de_pedidos```
+   cd gestion_de_pedidos
 2. Levanta todos los servicios (backend, base de datos, kafka, zookeeper) con un solo comando:
    ```bash
-   docker compose up -d```
+   docker compose up -d
+3. ¡Listo! La aplicación estará corriendo y lista para usarse.
 
-4. 
+##📌 Asegúrate de tener Docker y Docker Compose instalados en tu máquina antes de ejecutar el comando.
